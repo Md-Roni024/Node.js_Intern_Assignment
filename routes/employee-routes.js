@@ -9,7 +9,7 @@ const { runValidation } = require("../validation/index");
 router.post("/",employeeRegisterValidation,runValidation,createEmployee)
 router.get("/",getAllEmployee)
 router.get("/:id",getEmployeeByID)
-router.patch("/:id",employeeUpdateValidation,runValidation, updateEmployee);
+router.put("/:id",employeeUpdateValidation,runValidation, updateEmployee);
 router.delete("/:id",deleteEmployee)
 router.patch("/block/:id",blockEmployee)
 

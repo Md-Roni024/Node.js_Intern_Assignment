@@ -21,7 +21,7 @@ Following Task are complete in this project.
 - Task-4
     - Update individual employee details based on given ID.
         ```
-        Http method: PATCH
+        Http method: PUT
         endpoint   :http://localhost:3000/employee/:id
         ```
 - Task-5
