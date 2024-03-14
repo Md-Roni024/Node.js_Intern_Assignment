@@ -21,13 +21,13 @@ Following Task are complete in this project.
 - Task-4
     - Update individual employee details based on given ID.
         ```
-        Http method: PUT
+        Http method: PATCH
         endpoint   :http://localhost:3000/employee/:id
         ```
 - Task-5
     - Block and unblock user. Keep a boolean value in database. 
         ```
-        Http method: PUT
+        Http method: PATCH
         endpoint   :http://localhost:3000/employee/block/:id
         ```
 - Task-6
