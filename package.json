@@ -4,7 +4,7 @@
   "description": "6sense Backend Assignment",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "Roni Hossain",
   "license": "ISC",

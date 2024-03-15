@@ -1,5 +1,7 @@
 const Employee = require("../models/employee-model")
 const {v4:uuidv4} = require("uuid")
+
+//Task-1:Create Employee
 const createEmployee = async (req,res)=>{
     try{
         const employeeCreated = new Employee({
@@ -20,6 +22,7 @@ const createEmployee = async (req,res)=>{
         res.status(500).send(err.message)
     }
 }
+//Task-2: Get All Employee
 const getAllEmployee = async (req,res)=>{
     try{
         const employeeAll = await Employee.find()
@@ -28,10 +31,16 @@ const getAllEmployee = async (req,res)=>{
         res.status(500).send(err.message)
     }
 }
+
+//Get Employee By ID:
 const getEmployeeByID = async (req, res) => {
     try {
       const employeeByID = await Employee.findOne({ id: req.params.id });
-      res.status(200).json(employeeByID);
+      if(employeeByID){
+        res.status(200).json(employeeByID);
+      }else{
+        res.status(404).json({ error: 'Employee not found' });
+      }
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -40,11 +49,15 @@ const getEmployeeByID = async (req, res) => {
   const updateEmployee = async (req, res) => {
     try {
       const employeeUpdate = await Employee.findOne({ id: req.params.id });
-      employeeUpdate.firstname = req.body.firstname;
-      employeeUpdate.lastname =req.body.lastname
-      employeeUpdate.phonenumber = req.body.phonenumber
-      await employeeUpdate.save();
-      res.status(200).json(employeeUpdate);
+      if(employeeUpdate){
+        employeeUpdate.firstname = req.body.firstname;
+        employeeUpdate.lastname =req.body.lastname
+        employeeUpdate.phonenumber = req.body.phonenumber
+        await employeeUpdate.save();
+        res.status(200).json(employeeUpdate);
+      }else{
+        res.status(404).json({ error: 'Employee not found' });
+      }
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -52,8 +65,13 @@ const getEmployeeByID = async (req, res) => {
 
 const deleteEmployee = async (req, res) => {
     try {
-      await Employee.deleteOne({ id: req.params.id });
-      res.status(200).json({ message: "user is deleted" });
+      const existEmployee = await Employee.findOne({ id: req.params.id });
+      if(existEmployee){
+        await Employee.deleteOne(existEmployee);
+        res.status(200).json({ message: "Employee is deleted" });
+      }else{
+        res.status(404).json({ error: 'Employee not found' });
+      }
     } catch (error) {
       res.status(500).send(error.message);
     }
